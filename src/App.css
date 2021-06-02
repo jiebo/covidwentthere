@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+.map {
+    height: calc(100% - 114px);
+    width: 100%;
+    border-top: 2px solid #1978c8;
+    position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cluster-marker {
+    color: #fff;
+    background: #1978c8;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.center-container {
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h3:hover, svg:hover, .cluster-marker:hover {
+    cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.panel-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    font-size: 14px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.panel-content {
+    background: white;
+    width: 320px;
+    max-height: 360px;
+    padding: 8px;
+    overflow-y: auto;
+}
+
+.legend-container {
+    position: absolute;
+    bottom: 120px;
+    right: 10px;
+    background: transparent;
+    font-size: 14px;
+}
+
+.legend-toggle {
+    height: 120px;
+    width: 40px;
+    background: white;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.legend-toggle button, .panel-toggle button {
+    width: 120px;
+    transform: rotate(90deg) translateX(40px) translateY(40px);
+}
+
+.legend-content {
+    background: white;
+    width: 160px;
+    height: 120px;
+}
+
+.fa-adjust {
+    color: transparent;
+    background: linear-gradient(135deg, #1978c8 0%, #1978c8 50%, #d32d26 50%, #d32d26 100%);
+    border-radius: 50%;
 }
