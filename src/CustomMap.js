@@ -7,6 +7,7 @@ import {CustomMarker} from "./CustomMarker";
 import Legend from "./Legend";
 import InfoPanel from "./infopanel/InfoPanel";
 import CAA from "./caa/CAA";
+import useWindowDimensions from "./hooks/WindowDimensions";
 
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
@@ -16,15 +17,16 @@ const Marker = ({children}) => children;
 
 export default function Map() {
     const mapRef = useRef();
+    const {width} = useWindowDimensions()
     const [bounds, setBounds] = useState(null);
-    const [zoom, setZoom] = useState(12);
+    const [zoom, setZoom] = useState(getMinZoom);
     const [info, setInfo] = useState(null);
     const [showCaa, setShowCaa] = useState(true)
 
     const url = "https://storage.googleapis.com/covidwentthere_mock/query.json";
     // const url = "http://localhost:3001/query";
     const {data, error} = useSwr(url, {fetcher});
-    const locations = data && !error ? data.data : [];
+    const locations = data && !error ? (data.data ? data.data : data) : [];
     const caa = data && !error ? data.timestamp : null
 
     const points = locations.map(location => ({
@@ -47,9 +49,13 @@ export default function Map() {
         options: {radius: 45, maxZoom: 15}
     });
 
+    function getMinZoom() {
+        return width >= 600 ? 12 : 11
+    }
+
     function createMapOptions() {
         return {
-            minZoom: 12,
+            minZoom: getMinZoom(),
             clickableIcons: false,
             fullscreenControl: false
         };
@@ -80,7 +86,7 @@ export default function Map() {
             <GoogleMapReact
                 bootstrapURLKeys={{key: API_KEY}}
                 defaultCenter={{lat: 1.352, lng: 103.820}}
-                defaultZoom={12}
+                defaultZoom={getMinZoom()}
                 yesIWantToUseGoogleMapApiInternals
                 options={createMapOptions()}
                 onGoogleApiLoaded={({map}) => {
@@ -147,7 +153,7 @@ export default function Map() {
             </GoogleMapReact>
             <Legend/>
             <InfoPanel data={info} reset={setInfo}/>
-            <CAA caa={caa} show={showCaa} />
+            <CAA caa={caa} show={showCaa}/>
         </div>
     );
 }
