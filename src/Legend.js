@@ -2,11 +2,13 @@ import React from "react";
 import {Button, Grid, Grow, Paper} from "@material-ui/core";
 import fontawesome from '@fortawesome/fontawesome'
 import {faVirus, faViruses, faCircle} from "@fortawesome/free-solid-svg-icons"
+import useWindowDimensions from "./hooks/WindowDimensions";
 
 fontawesome.library.add({faVirus, faViruses, faCircle})
 
 export default function Legend() {
-    const [checked, setChecked] = React.useState(true);
+    const {width} = useWindowDimensions()
+    const [checked, setChecked] = React.useState(width >= 600);
 
     const handleChange = () => {
         setChecked((prev) => !prev);

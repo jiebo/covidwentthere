@@ -6,6 +6,7 @@ import "./App.css";
 import {CustomMarker} from "./CustomMarker";
 import Legend from "./Legend";
 import InfoPanel from "./infopanel/InfoPanel";
+import CAA from "./caa/CAA";
 
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
@@ -18,10 +19,14 @@ export default function Map() {
     const [bounds, setBounds] = useState(null);
     const [zoom, setZoom] = useState(12);
     const [info, setInfo] = useState(null);
+    const [showCaa, setShowCaa] = useState(true)
 
     const url = "https://storage.googleapis.com/covidwentthere_mock/query.json";
+    // const url = "http://localhost:3001/query";
     const {data, error} = useSwr(url, {fetcher});
-    const locations = data && !error ? data : [];
+    const locations = data && !error ? data.data : [];
+    const caa = data && !error ? data.timestamp : null
+
     const points = locations.map(location => ({
         type: "Feature",
         properties: {cluster: false, id: location.id},
@@ -134,6 +139,7 @@ export default function Map() {
                             lng={longitude}
                             data={cluster.data}
                             info={setInfo}
+                            showCaa={setShowCaa}
                         >
                         </CustomMarker>
                     );
@@ -141,6 +147,7 @@ export default function Map() {
             </GoogleMapReact>
             <Legend/>
             <InfoPanel data={info} reset={setInfo}/>
+            <CAA caa={caa} show={showCaa} />
         </div>
     );
 }

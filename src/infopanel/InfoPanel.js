@@ -10,7 +10,6 @@ export default function InfoPanel(params) {
     };
 
     let info = params.data
-    console.log(info)
 
     return (
         <Grid className={"panel-container"} container direction={"row-reverse"} xs={12} justify={"center"}
@@ -24,7 +23,6 @@ export default function InfoPanel(params) {
                             <Grid item xs={11}><h4
                                 style={{marginTop: "8px", marginBottom: "8px"}}>{info?.location ?? ""}</h4></Grid>
                             <Grid item xs={1}>
-                                {/*<FontAwesomeIcon onClick={() => hide()} pull={"right"} icon={"times"} size={"lg"}/>*/}
                                 <IconButton onClick={() => hide()} style={{padding: "4px"}}><CloseIcon/></IconButton>
                             </Grid>
                         </Grid>
