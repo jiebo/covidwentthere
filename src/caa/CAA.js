@@ -5,7 +5,7 @@ import CloseIcon from "@material-ui/icons/Close";
 var dateFormat = require("dateformat");
 
 export default function CAA(params) {
-    const caa = dateFormat(Date(params.caa), "dd mmm yy")
+    const caa = dateFormat(new Date(params.caa), "dd mmm yy")
 
     const [display, setDisplay] = useState(true)
 
@@ -17,7 +17,7 @@ export default function CAA(params) {
                 <Paper square elevation={1} className={"caa-content"}>
                     <Grid container direction={"row"} style={{height: "100%", padding: "6px"}}
                           justify={"center"} alignItems={"center"}>
-                        <Grid item xs={10}>
+                        <Grid item xs={9}>
                             <h4 style={{marginTop: "8px", marginBottom: "8px"}}>
                                 Updated as of {caa}
                             </h4>
