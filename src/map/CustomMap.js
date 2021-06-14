@@ -1,35 +1,29 @@
 import React, {useState, useRef} from "react";
-import useSwr from "swr";
 import GoogleMapReact from "google-map-react";
 import useSupercluster from "use-supercluster";
-import "./App.css";
+import "../App.css";
 import {CustomMarker} from "./CustomMarker";
 import Legend from "./Legend";
-import InfoPanel from "./infopanel/InfoPanel";
-import CAA from "./caa/CAA";
-import useWindowDimensions from "./hooks/WindowDimensions";
-
-const fetcher = (...args) => fetch(...args).then(response => response.json());
+import InfoPanel from "../infopanel/InfoPanel";
+import CAA from "../caa/CAA";
+import useWindowDimensions from "../hooks/WindowDimensions";
 
 const API_KEY = process.env.REACT_APP_MAPS_KEY
 
 const Marker = ({children}) => children;
 
-export default function Map() {
+export default function Map(params) {
     const mapRef = useRef();
-    const {width} = useWindowDimensions()
+    const {height, width} = useWindowDimensions()
     const [bounds, setBounds] = useState(null);
     const [zoom, setZoom] = useState(getMinZoom);
     const [info, setInfo] = useState(null);
     const [showCaa, setShowCaa] = useState(true)
 
-    const url = "https://storage.googleapis.com/covidwentthere_mock/query.json";
-    // const url = "http://localhost:3001/query";
-    const {data, error} = useSwr(url, {fetcher});
-    const locations = data && !error ? (data.data ? data.data : data) : [];
-    const caa = data && !error ? data.timestamp : null
+    const locations = params?.data ? params.data : []
+    const caa = params?.timestamp ? params.timestamp : 0
 
-    const points = locations.map(location => ({
+    const points = locations?.map(location => ({
         type: "Feature",
         properties: {cluster: false, id: location.id},
         geometry: {
@@ -82,7 +76,7 @@ export default function Map() {
     }
 
     return (
-        <div className={"map"}>
+        <div className={"map"} style={{height: height - 98}}>
             <GoogleMapReact
                 bootstrapURLKeys={{key: API_KEY}}
                 defaultCenter={{lat: 1.352, lng: 103.820}}
@@ -121,7 +115,7 @@ export default function Map() {
                                     style={{
                                         width: `${10 + (count / points.length) * 20}px`,
                                         height: `${10 + (count / points.length) * 20}px`,
-                                        background: `${count >= 20 ? "#d32d26" : "#1978c8"}`
+                                        background: `${count >= 15 ? "#d32d26" : "#1978c8"}`
                                     }}
                                     onClick={() => {
                                         const expansionZoom = Math.min(
@@ -144,6 +138,7 @@ export default function Map() {
                             lat={latitude}
                             lng={longitude}
                             data={cluster.data}
+                            zoom={zoom}
                             info={setInfo}
                             showCaa={setShowCaa}
                         >

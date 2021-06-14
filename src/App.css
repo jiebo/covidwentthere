@@ -1,5 +1,4 @@
 .map {
-    height: calc(100% - 98px);
     width: 100%;
     border-top: 2px solid #1978c8;
     position: relative;
@@ -83,6 +82,13 @@ h3:hover, svg:hover, .cluster-marker:hover {
     background: white;
     width: 160px;
     height: 120px;
+}
+
+.slider-container {
+    bottom: 24px;
+    left: 50%;
+    margin-left: -100px;
+    padding: 16px;
 }
 
 .fa-adjust {

@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Map from "./CustomMap";
-import Header from "./Header";
+import Container from "./Container";
 
 ReactDOM.render(
     <React.StrictMode>
-        <div style={{height: "100vh"}}>
-            <Header/>
-            <Map/>
+        <div>
+            <Container />
         </div>
     </React.StrictMode>,
     document.getElementById('root')

@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Grid, Grow, Paper} from "@material-ui/core";
 import fontawesome from '@fortawesome/fontawesome'
 import {faVirus, faViruses, faCircle} from "@fortawesome/free-solid-svg-icons"
-import useWindowDimensions from "./hooks/WindowDimensions";
+import useWindowDimensions from "../hooks/WindowDimensions";
 
 fontawesome.library.add({faVirus, faViruses, faCircle})
 
