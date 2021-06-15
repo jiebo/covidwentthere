@@ -9,8 +9,8 @@ fontawesome.library.add(faVirus, faViruses)
 class CustomMarker extends Component {
 
     render() {
-        const alpha = ((this.props.zoom > 12 ? this.props.zoom : 0) - 12) * 15
-        const value = "rgba(225, 225, 225, " + alpha + "%)"
+        const alpha = Math.min(((this.props.zoom > 12 ? this.props.zoom : 0) - 12) * 15, 75)
+        const value = "rgba(255, 215, 215, " + alpha + "%)"
 
         if (this.props.data.visits.length >= 5) {
             return (

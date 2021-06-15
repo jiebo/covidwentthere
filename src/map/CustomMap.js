@@ -51,7 +51,8 @@ export default function Map(params) {
         return {
             minZoom: getMinZoom(),
             clickableIcons: false,
-            fullscreenControl: false
+            fullscreenControl: false,
+            zoomControl: false
         };
     }
 
@@ -148,7 +149,7 @@ export default function Map(params) {
             </GoogleMapReact>
             <Legend/>
             <InfoPanel data={info} reset={setInfo}/>
-            <CAA caa={caa} show={showCaa}/>
+            <CAA caa={caa} zoom={zoom} show={showCaa}/>
         </div>
     );
 }

@@ -59,7 +59,7 @@ h3:hover, svg:hover, .cluster-marker:hover {
 
 .legend-container {
     position: absolute;
-    bottom: 120px;
+    bottom: 20px;
     right: 10px;
     background: transparent;
     font-size: 14px;

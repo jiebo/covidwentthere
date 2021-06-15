@@ -13,7 +13,7 @@ export default function CAA(params) {
         <Grid className={"caa-container"} container direction={"row-reverse"} xs={12} justify={"center"}
               alignItems={"center"}
               style={{width: "240px"}}>
-            <Grow in={display && params.show && params.caa}>
+            <Grow in={display && params.show && params.caa && params.zoom <= 12}>
                 <Paper square elevation={1} className={"caa-content"}>
                     <Grid container direction={"row"} style={{height: "100%", padding: "6px"}}
                           justify={"center"} alignItems={"center"}>
