@@ -12,7 +12,7 @@ export default function InfoPanel(params) {
     let info = params.data
 
     return (
-        <Grid className={"panel-container"} container direction={"row-reverse"} xs={12} justify={"center"}
+        <Grid className={"panel-container"} container direction={"row-reverse"} justify={"center"}
               alignItems={"center"}
               style={{width: "320px"}}>
             <Grow style={{transformOrigin: "right"}} in={info !== null}>

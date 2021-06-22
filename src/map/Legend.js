@@ -10,14 +10,19 @@ export default function Legend() {
     const {width} = useWindowDimensions()
     const [checked, setChecked] = React.useState(width >= 600);
 
+    let bottom = "20px"
+    if (width < 600) {
+        bottom = "60px"
+    }
+
     const handleChange = () => {
         setChecked((prev) => !prev);
     };
 
     return (
-        <Grid className={"legend-container"} container direction={"row-reverse"} xs={12} justify={"center"}
+        <Grid className={"legend-container"} container direction={"row-reverse"} justify={"center"}
               alignItems={"center"}
-              style={{height: "120px", width: "200px"}}>
+              style={{height: "120px", width: "200px", bottom: bottom}}>
             <Grid item onClick={() => {
                 handleChange(checked)
             }}>

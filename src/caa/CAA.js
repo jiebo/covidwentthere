@@ -10,10 +10,10 @@ export default function CAA(params) {
     const [display, setDisplay] = useState(true)
 
     return (
-        <Grid className={"caa-container"} container direction={"row-reverse"} xs={12} justify={"center"}
+        <Grid className={"caa-container"} container direction={"row-reverse"} justify={"center"}
               alignItems={"center"}
               style={{width: "240px"}}>
-            <Grow in={display && params.show && params.caa && params.zoom <= 12}>
+            <Grow in={display && params.show && params.caa !== 0 && params.zoom <= 12}>
                 <Paper square elevation={1} className={"caa-content"}>
                     <Grid container direction={"row"} style={{height: "100%", padding: "6px"}}
                           justify={"center"} alignItems={"center"}>

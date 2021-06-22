@@ -1,13 +1,20 @@
 import Carousel from "react-material-ui-carousel";
 import React from "react";
 import HistoryIcon from '@material-ui/icons/History';
-import {Button, Grid, Grow, IconButton, Paper, Typography} from "@material-ui/core";
+import {Grid, Grow, IconButton, Paper, Typography} from "@material-ui/core";
 import {ChevronLeft, ChevronRight} from "@material-ui/icons";
+import useWindowDimensions from "../hooks/WindowDimensions";
 
 let dateFormat = require("dateformat");
 
 export default function DateCarousel(params) {
     const [checked, setChecked] = React.useState(true);
+    const {width} = useWindowDimensions()
+
+    let bottom = "140px"
+    if (width < 600) {
+        bottom = "20px"
+    }
 
     const handleChange = () => {
         setChecked((prev) => !prev);
@@ -26,9 +33,9 @@ export default function DateCarousel(params) {
     }
 
     return (
-        <Grid className={"slider-container"} container direction={"row-reverse"} xs={12} justify={"center"}
+        <Grid className={"slider-container"} container direction={"row-reverse"} justify={"center"}
               alignItems={"center"}
-              style={{height: "40px", width: "200px"}}>
+              style={{height: "40px", width: "200px", bottom: bottom}}>
             <Grid item onClick={() => {
                 handleChange(checked)
             }}>
@@ -42,7 +49,7 @@ export default function DateCarousel(params) {
                 <Paper square elevation={1} className={"slider-content"}>
                     <Grid container direction={"row"} style={{height: "100%"}}
                           justify={"center"} alignItems={"center"}>
-                        <Grid item xs={12} justify={"center"} alignItems={"center"}>
+                        <Grid item xs={12}>
                             <Carousel
                                 className={"slider-content"}
                                 autoPlay={false}
@@ -66,7 +73,7 @@ export default function DateCarousel(params) {
                                 }}
                                 NextIcon={<ChevronRight/>}
                                 PrevIcon={<ChevronLeft/>}>
-                                {items.map((item, i) => <Item date={item}/>)}
+                                {items.map((item, i) => <Item key={i} date={item}/>)}
                             </Carousel>
                         </Grid>
                     </Grid>
