@@ -6,9 +6,10 @@ import {Box} from "@material-ui/core";
 export default function Container() {
 
     const URL_FULL = "https://storage.googleapis.com/covidwentthere_mock/query.json"
-    const URL_DAILY = "http://localhost:3001/daily"
+    const URL_DAILY = "https://storage.googleapis.com/covidwentthere_mock/daily.json"
     const [allData, setAllData] = useState()
     const [dailyData, setDailyData] = useState()
+    const [displayData, setDisplayData] = useState()
 
     useEffect(() => {
         fetch(URL_FULL, {
@@ -16,7 +17,8 @@ export default function Container() {
         }).then(res => res.json())
             .then(response => {
                 setAllData(response)
-                // fetchDailyCases()
+                setDisplayData(response.data)
+                fetchDailyCases()
             })
     }, [])
 
@@ -26,8 +28,15 @@ export default function Container() {
         }).then(res => res.json())
             .then(response => {
                 setDailyData(response)
-                console.log(response)
             })
+    }
+
+    function updateDisplay(index) {
+        if (index === 14) {
+            setDisplayData(allData.data)
+        } else {
+            setDisplayData(dailyData[index])
+        }
     }
 
     return (
@@ -36,7 +45,11 @@ export default function Container() {
                 <Header/>
             </Box>
             <Box flexGrow={1}>
-                <Map data={allData?.data ? allData.data : []} timestamp={allData?.timestamp}/>
+                <Map
+                    data={displayData ? displayData : []}
+                    timestamp={allData?.timestamp}
+                    daily={dailyData ? dailyData : []}
+                    updateDisplay={updateDisplay}/>
             </Box>
         </Box>
     )

@@ -85,10 +85,29 @@ h3:hover, svg:hover, .cluster-marker:hover {
 }
 
 .slider-container {
-    bottom: 24px;
-    left: 50%;
-    margin-left: -100px;
-    padding: 16px;
+    position: absolute;
+    bottom: 140px;
+    right: 10px;
+    background: transparent;
+    font-size: 14px;
+}
+
+.slider-toggle {
+    height: 40px;
+    width: 40px;
+    background: white;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.slider-content {
+    background: white;
+    width: 160px;
+    height: 40px;
+}
+
+.slider-nav {
+    padding: 8px;
 }
 
 .fa-adjust {

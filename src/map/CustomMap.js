@@ -7,6 +7,7 @@ import Legend from "./Legend";
 import InfoPanel from "../infopanel/InfoPanel";
 import CAA from "../caa/CAA";
 import useWindowDimensions from "../hooks/WindowDimensions";
+import DateCarousel from "../datecarousel/DateCarousel";
 
 const API_KEY = process.env.REACT_APP_MAPS_KEY
 
@@ -21,6 +22,7 @@ export default function Map(params) {
     const [showCaa, setShowCaa] = useState(true)
 
     const locations = params?.data ? params.data : []
+    const daily = params?.daily ? params.daily : []
     const caa = params?.timestamp ? params.timestamp : 0
 
     const points = locations?.map(location => ({
@@ -148,6 +150,7 @@ export default function Map(params) {
                 })}
             </GoogleMapReact>
             <Legend/>
+            <DateCarousel data={daily} caa={caa} updateDisplay={params.updateDisplay} />
             <InfoPanel data={info} reset={setInfo}/>
             <CAA caa={caa} zoom={zoom} show={showCaa}/>
         </div>
