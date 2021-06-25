@@ -93,6 +93,9 @@ export default function Map(params) {
                 onGoogleApiLoaded={({map}) => {
                     mapRef.current = map;
                 }}
+                onClick={() => {
+                    setInfo(null)
+                }}
                 onChange={({zoom, bounds}) => {
                     setZoom(zoom);
                     setBounds([
