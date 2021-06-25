@@ -23,7 +23,8 @@ class CustomMarker extends Component {
                     padding: "6px",
                     minWidth: "48px",
                     background: value
-                }} onClick={() => {
+                }} onClick={(e) => {
+                    e.stopPropagation()
                     this.props.info(this.props.data)
                     this.props.showCaa(false)
                 }}>
@@ -41,7 +42,8 @@ class CustomMarker extends Component {
                 padding: "6px",
                 minWidth: "32px",
                 background: value
-            }} onClick={() => {
+            }} onClick={e => {
+                e.stopPropagation()
                 this.props.info(this.props.data)
                 this.props.showCaa(false)
             }}>
