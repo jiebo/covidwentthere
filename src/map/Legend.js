@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Grid, Grow, Paper} from "@material-ui/core";
+import {Button, Grid, Grow, Paper, Tooltip} from "@material-ui/core";
 import fontawesome from '@fortawesome/fontawesome'
 import {faVirus, faViruses, faCircle} from "@fortawesome/free-solid-svg-icons"
 import useWindowDimensions from "../hooks/WindowDimensions";
@@ -8,7 +8,8 @@ fontawesome.library.add({faVirus, faViruses, faCircle})
 
 export default function Legend() {
     const {width} = useWindowDimensions()
-    const [checked, setChecked] = React.useState(width >= 600);
+    const [checked, setChecked] = React.useState(true);
+    const [tooltip, setTooltip] = React.useState(width < 600)
 
     let bottom = "20px"
     if (width < 600) {
@@ -16,7 +17,8 @@ export default function Legend() {
     }
 
     const handleChange = () => {
-        setChecked((prev) => !prev);
+        setChecked((prev) => !prev || width >= 600);
+        setTooltip(false)
     };
 
     return (
@@ -27,7 +29,9 @@ export default function Legend() {
                 handleChange(checked)
             }}>
                 <Paper square className={"legend-toggle"}>
-                    <Button disableRipple>Legend</Button>
+                    <Tooltip title={"Click to hide"} placement={"top"} arrow open={tooltip}>
+                        <Button disableRipple>Legend</Button>
+                    </Tooltip>
                 </Paper>
             </Grid>
             <Grow style={{transformOrigin: "right"}} in={checked}>
@@ -51,7 +55,7 @@ export default function Legend() {
                                    height: "1.5em",
                                    marginLeft: "4px",
                                    marginRight: "4px", color: "#d32d26"
-                               }}/> <span style={{verticalAlign: "top"}}>More than five</span>
+                               }}/> <span style={{verticalAlign: "top"}}>&gt;10 visits</span>
                         </Grid>
                         <Grid item>
                             <i className={"fas fa-virus"}
@@ -60,7 +64,7 @@ export default function Legend() {
                                    height: "1.25em",
                                    marginLeft: "6px",
                                    marginRight: "6px"
-                               }}/> <span style={{verticalAlign: "top"}}>Five or less</span>
+                               }}/> <span style={{verticalAlign: "top"}}>&lt;=10 visits</span>
                         </Grid>
                     </Grid>
                 </Paper>

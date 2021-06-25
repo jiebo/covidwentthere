@@ -61,12 +61,16 @@ export default function Map(params) {
     function getCaseCountForCluster(cluster) {
         let queue = []
         let count = 0
+        let hasHotspot = false
         queue.push(cluster)
         while (queue.length > 0) {
             let current = queue.shift()
             if (!current.properties.cluster) {
                 if (typeof current.data !== "undefined") {
                     count += current.data.visits.length
+                    if (current.data.visits.length >= 10) {
+                        hasHotspot = true
+                    }
                 }
             } else {
                 let children = supercluster.getChildren(current.id)
@@ -75,7 +79,7 @@ export default function Map(params) {
                 }
             }
         }
-        return count;
+        return [count, hasHotspot];
     }
 
     return (
@@ -106,7 +110,7 @@ export default function Map(params) {
                     } = cluster.properties;
 
                     if (isCluster) {
-                        let count = getCaseCountForCluster(cluster)
+                        let clusterProp = getCaseCountForCluster(cluster)
                         return (
                             <Marker
                                 key={`cluster-${cluster.id}`}
@@ -116,9 +120,9 @@ export default function Map(params) {
                                 <div
                                     className="cluster-marker"
                                     style={{
-                                        width: `${10 + (count / points.length) * 20}px`,
-                                        height: `${10 + (count / points.length) * 20}px`,
-                                        background: `${count >= 15 ? "#d32d26" : "#1978c8"}`
+                                        width: `${10 + (clusterProp[0] / points.length) * 20}px`,
+                                        height: `${10 + (clusterProp[0] / points.length) * 20}px`,
+                                        background: `${clusterProp[1] ? "#d32d26" : "#1978c8"}`
                                     }}
                                     onClick={() => {
                                         const expansionZoom = Math.min(
@@ -129,7 +133,7 @@ export default function Map(params) {
                                         mapRef.current.panTo({lat: latitude, lng: longitude});
                                     }}
                                 >
-                                    {count}
+                                    {clusterProp}
                                 </div>
                             </Marker>
                         );

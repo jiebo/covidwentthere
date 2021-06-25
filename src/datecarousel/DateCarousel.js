@@ -1,14 +1,14 @@
 import Carousel from "react-material-ui-carousel";
 import React from "react";
 import HistoryIcon from '@material-ui/icons/History';
-import {Grid, Grow, IconButton, Paper, Typography} from "@material-ui/core";
+import {Grid, IconButton, Paper, Typography} from "@material-ui/core";
 import {ChevronLeft, ChevronRight} from "@material-ui/icons";
 import useWindowDimensions from "../hooks/WindowDimensions";
 
 let dateFormat = require("dateformat");
 
 export default function DateCarousel(params) {
-    const [checked, setChecked] = React.useState(true);
+    const [index, setIndex] = React.useState(params.data.length - 1)
     const {width} = useWindowDimensions()
 
     let bottom = "140px"
@@ -16,8 +16,8 @@ export default function DateCarousel(params) {
         bottom = "20px"
     }
 
-    const handleChange = () => {
-        setChecked((prev) => !prev);
+    const reset = () => {
+        setIndex(14)
     };
 
     const data = params.data ? params.data : []
@@ -37,7 +37,7 @@ export default function DateCarousel(params) {
               alignItems={"center"}
               style={{height: "40px", width: "200px", bottom: bottom}}>
             <Grid item onClick={() => {
-                handleChange(checked)
+                reset()
             }}>
                 <Paper square className={"slider-toggle"}>
                     <IconButton style={{margin: "4px", padding: "4px"}} disableRipple>
@@ -45,7 +45,6 @@ export default function DateCarousel(params) {
                     </IconButton>
                 </Paper>
             </Grid>
-            <Grow style={{transformOrigin: "right"}} in={checked}>
                 <Paper square elevation={1} className={"slider-content"}>
                     <Grid container direction={"row"} style={{height: "100%"}}
                           justify={"center"} alignItems={"center"}>
@@ -55,10 +54,11 @@ export default function DateCarousel(params) {
                                 autoPlay={false}
                                 animation={"slide"}
                                 indicators={false}
-                                index={14}
+                                index={index >= 0 ? index : 14}
                                 navButtonsAlwaysVisible={true}
                                 onChange={(index, active) => {
                                     params?.updateDisplay(index)
+                                    setIndex(index)
                                 }}
                                 navButtonsProps={{
                                     style: {
@@ -78,7 +78,6 @@ export default function DateCarousel(params) {
                         </Grid>
                     </Grid>
                 </Paper>
-            </Grow>
         </Grid>
     )
 }
