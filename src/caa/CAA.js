@@ -5,8 +5,7 @@ import CloseIcon from "@material-ui/icons/Close";
 var dateFormat = require("dateformat");
 
 export default function CAA(params) {
-    const caa = dateFormat(new Date(params.caa), "dd mmm yy")
-
+    const caa = dateFormat(new Date(params.caa), "dd mmm 'yy")
     const [display, setDisplay] = useState(true)
 
     return (
