@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+# Covid Went There
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create a map view of all the public places visited by persons with COVID. Data is obtained from MOH's daily press release.
 
-## Available Scripts
+## Live Preview
 
-In the project directory, you can run:
+You can find the website at https://covidwentthere.com which is hosted on Firebase.
 
-### `npm start`
+## Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Typical React project. Just run `npm start` to run the app in development mode.\
+Run `npm run build` for the production build. For Firebase hosting, it was necessary to point the `public` path to the `build` directory where the production build is generated
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## API
 
-### `npm test`
+The API is a static JSON file that's hosted on Google Cloud. I've a local instance that I'll run daily to parse, format, and upload onto GCP. There are two files, [master data](https://storage.googleapis.com/covidwentthere_mock/query.json) and the one that shows the [daily visits](https://storage.googleapis.com/covidwentthere_mock/daily.json)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can update the contract for your own country/city.
 
-### `npm run build`
+## Customise
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Simply get your own Google Maps API Key and set in on React's `.env` file in your project root. Use the key `REACT_APP_MAPS_KEY`. Do also update the default lat/lng to your country/city. This can be done in the [CustomMap](./src/map/CustomMap.js)
