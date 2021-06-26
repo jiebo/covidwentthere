@@ -8,6 +8,7 @@ import InfoPanel from "../infopanel/InfoPanel";
 import CAA from "../caa/CAA";
 import useWindowDimensions from "../hooks/WindowDimensions";
 import DateCarousel from "../datecarousel/DateCarousel";
+import {clusterSize} from "../Container";
 
 const API_KEY = process.env.REACT_APP_MAPS_KEY
 
@@ -68,7 +69,7 @@ export default function Map(params) {
             if (!current.properties.cluster) {
                 if (typeof current.data !== "undefined") {
                     count += current.data.visits.length
-                    if (current.data.visits.length >= 10) {
+                    if (current.data.visits.length >= clusterSize) {
                         hasHotspot = true
                     }
                 }

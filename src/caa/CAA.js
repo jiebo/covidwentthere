@@ -2,7 +2,7 @@ import {Box, Grid, Grow, IconButton, Paper, Typography} from "@material-ui/core"
 import React, {useState} from "react";
 import CloseIcon from "@material-ui/icons/Close";
 
-var dateFormat = require("dateformat");
+const dateFormat = require("dateformat");
 
 export default function CAA(params) {
     const caa = dateFormat(new Date(params.caa), "dd mmm 'yy")

@@ -3,6 +3,7 @@ import {Button, Grid, Grow, Paper, Tooltip} from "@material-ui/core";
 import fontawesome from '@fortawesome/fontawesome'
 import {faVirus, faViruses, faCircle} from "@fortawesome/free-solid-svg-icons"
 import useWindowDimensions from "../hooks/WindowDimensions";
+import {CAPS, clusterSizeInWords, NO_CAPS} from "../Container";
 
 fontawesome.library.add({faVirus, faViruses, faCircle})
 
@@ -24,7 +25,7 @@ export default function Legend() {
     return (
         <Grid className={"legend-container"} container direction={"row-reverse"} justify={"center"}
               alignItems={"center"}
-              style={{height: "120px", width: "200px", bottom: bottom}}>
+              style={{height: "120px", width: "220px", bottom: bottom}}>
             <Grid item onClick={() => {
                 handleChange(checked)
             }}>
@@ -55,7 +56,7 @@ export default function Legend() {
                                    height: "1.5em",
                                    marginLeft: "4px",
                                    marginRight: "4px", color: "#d32d26"
-                               }}/> <span style={{verticalAlign: "top"}}>&gt;10 visits</span>
+                               }}/> <span style={{verticalAlign: "top"}}>More than {clusterSizeInWords(NO_CAPS)} visits</span>
                         </Grid>
                         <Grid item>
                             <i className={"fas fa-virus"}
@@ -64,7 +65,7 @@ export default function Legend() {
                                    height: "1.25em",
                                    marginLeft: "6px",
                                    marginRight: "6px"
-                               }}/> <span style={{verticalAlign: "top"}}>&lt;=10 visits</span>
+                               }}/> <span style={{verticalAlign: "top"}}>{clusterSizeInWords(CAPS)} or less visits</span>
                         </Grid>
                     </Grid>
                 </Paper>

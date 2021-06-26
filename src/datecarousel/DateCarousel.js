@@ -35,7 +35,7 @@ export default function DateCarousel(params) {
     return (
         <Grid className={"slider-container"} container direction={"row-reverse"} justify={"center"}
               alignItems={"center"}
-              style={{height: "40px", width: "200px", bottom: bottom}}>
+              style={{height: "40px", width: "220px", bottom: bottom}}>
             <Grid item onClick={() => {
                 reset()
             }}>

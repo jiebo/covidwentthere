@@ -3,6 +3,7 @@ import fontawesome from '@fortawesome/fontawesome'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faVirus, faViruses} from "@fortawesome/free-solid-svg-icons"
 import {Button} from "@material-ui/core";
+import {clusterSize} from "../Container";
 
 fontawesome.library.add(faVirus, faViruses)
 
@@ -12,7 +13,7 @@ class CustomMarker extends Component {
         const alpha = Math.min(((this.props.zoom > 12 ? this.props.zoom : 0) - 12) * 15, 75)
         const value = "rgba(255, 215, 215, " + alpha + "%)"
 
-        if (this.props.data.visits.length >= 10) {
+        if (this.props.data.visits.length >= clusterSize) {
             return (
                 <Button variant={"contained"} disableElevation style={{
                     height: "48px",

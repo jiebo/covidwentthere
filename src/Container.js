@@ -54,3 +54,20 @@ export default function Container() {
         </Box>
     )
 }
+
+export const clusterSize = 5
+export const CAPS = true
+export const NO_CAPS = false
+export const clusterSizeInWords = (cap) => {
+    if (clusterSize === 10) {
+        if (cap === CAPS) {
+            return "Ten"
+        }
+        return "ten"
+    } else {
+        if (cap === CAPS) {
+            return "Five"
+        }
+        return "five"
+    }
+}
