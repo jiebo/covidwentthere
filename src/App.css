@@ -29,13 +29,13 @@ h3:hover, svg:hover, .cluster-marker:hover {
     position: absolute;
     top: 10px;
     left: 50%;
-    margin-left: -120px;
+    margin-left: -140px;
     background: transparent;
     font-size: 14px;
 }
 
 .caa-content {
-    width: 240px;
+    width: 280px;
     padding: 0;
     overflow-y: auto;
     text-align: center;
