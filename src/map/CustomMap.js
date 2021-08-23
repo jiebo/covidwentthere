@@ -26,6 +26,8 @@ export default function Map(params) {
     const daily = params?.daily ? params.daily : []
     const caa = params?.timestamp ? params.timestamp : 0
 
+    console.log(locations)
+
     const points = locations?.map(location => ({
         type: "Feature",
         properties: {cluster: false, id: location.id},
