@@ -18,11 +18,11 @@ export default function DateCarousel(params) {
         setIndex(14)
     };
     const items = []
-    for (let i = 29; i >= 15; i--) {
+    for (let i = 28; i >= 14; i--) {
         items.push("" + i + " Jun")
     }
     items.reverse()
-    items[14] = items[14] ? "15 Jun - 28 Jun" : null
+    items[14] = items[14] ? "14 Jun - 27 Jun" : null
 
     return (
         <Grid className={"slider-container"} container direction={"row-reverse"} justify={"center"}
